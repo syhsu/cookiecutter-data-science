@@ -50,9 +50,6 @@ coverage.xml
 # Django stuff:
 *.log
 
-# Sphinx documentation
-docs/_build/
-
 # PyBuilder
 target/
 
@@ -77,7 +74,7 @@ target/
 
 # exclude data from source control by default
 /data/
-
+/models/
 # Mac OS-specific storage files
 .DS_Store
 
