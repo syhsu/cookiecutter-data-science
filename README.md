@@ -3,7 +3,7 @@
 _A logical, reasonably standardized, but flexible project structure for doing and sharing data science work._
 
 
-#### [Project homepage](http://drivendata.github.io/cookiecutter-data-science/)
+#### [Project homepage](Modify from http://drivendata.github.io/cookiecutter-data-science/)
 
 
 ### Requirements to use the cookiecutter template:
@@ -26,10 +26,7 @@ $ conda install cookiecutter
 ### To start a new project, run:
 ------------
 
-    cookiecutter https://github.com/drivendata/cookiecutter-data-science
-
-
-[![asciicast](https://asciinema.org/a/244658.svg)](https://asciinema.org/a/244658)
+    cookiecutter https://github.com/syhsu/cookiecutter-data-science
 
 
 ### The resulting directory structure
@@ -38,54 +35,45 @@ $ conda install cookiecutter
 The directory structure of your new project looks like this: 
 
 ```
-├── LICENSE
-├── Makefile           <- Makefile with commands like `make data` or `make train`
-├── README.md          <- The top-level README for developers using this project.
-├── data
-│   ├── external       <- Data from third party sources.
-│   ├── interim        <- Intermediate data that has been transformed.
-│   ├── processed      <- The final, canonical data sets for modeling.
-│   └── raw            <- The original, immutable data dump.
+{{cookiecutter.repo_name}}
+├── .gitignore                          <- GitHub's excellent Python .gitignore customized for this project
+├── LICENSE                             <- Your project's license. 
+├── requirements.txt                    <- The required packages for reproducing the analysis environment
+├── README.md                           <- The top-level README for developers using this project.
+├── Dockerfile                          <- The Dockerfile for running the codes in src
 │
-├── docs               <- A default Sphinx project; see sphinx-doc.org for details
+├── data 
+│   ├── raw                             <- The original, immutable data dump; .json/.yaml pointing to the raw data dump 
+│   │   └── metadata.json               <- Format still requires to define but just update from the previous version, i.e. only-one record is kept.
+│   ├── external
+│   │   └── metadata.json     
+│   ├── interim                         <- Intermediate data that has been transformed.
+│   │   └── metadata.json
+│   └── final                           <- The final, canonical data sets for modeling.
+│       └── metadata.json
 │
-├── models             <- Trained and serialized models, model predictions, or model summaries
+├── docs                                <- Documentations, reports, References, and all other explanatory materials
+│   
 │
-├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
-│                         the creator's initials, and a short `-` delimited description, e.g.
-│                         `1.0-jqp-initial-data-exploration`.
+├── notebooks                           <- Jupyter notebooks. Naming convention is a number (for ordering),
+│                                          the creator's initials, and a short `_` delimited description, e.g.
+│                                          `01_cp_exploratory_data_analysis.ipynb`. NOTE: clean outputs before pushing to git!!
 │
-├── references         <- Data dictionaries, manuals, and all other explanatory materials.
+├── models                              <- Trained and serialized models, model predictions, or model summaries
+│   └── metadata.json
 │
-├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
-│   └── figures        <- Generated graphics and figures to be used in reporting
+├── pipelines                           <- Pipelines and data workflows. Add subfolder from the used orchestration tool, e.g. airflow, kubeflow
+│   ├── kubeflow
+│   │   ├── {{cookiecutter.repo_name}}  <- compiled kubeflow pipelines    
+│   └── airflow
 │
-├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
-│                         generated with `pip freeze > requirements.txt`
+├── src                                 <- Source folder for training, analyzing codes
+│   └── components                      <- kubeflow components or airflow custom operators [Align with Dbox design]
 │
-├── src                <- Source code for use in this project.
-│   ├── __init__.py    <- Makes src a Python module
-│   │
-│   ├── data           <- Scripts to download or generate data
-│   │   └── make_dataset.py
-│   │
-│   ├── features       <- Scripts to turn raw data into features for modeling
-│   │   └── build_features.py
-│   │
-│   ├── models         <- Scripts to train models and then use trained models to make
-│   │   │                 predictions
-│   │   ├── predict_model.py
-│   │   └── train_model.py
-│   │
-│   └── visualization  <- Scripts to create exploratory and results oriented visualizations
-│       └── visualize.py
-│
-└── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
+├── tests                               <- Testing codes        
+│   └──components                      
+└── setup.py
 ```
-
-## Contributing
-
-We welcome contributions! [See the docs for guidelines](https://drivendata.github.io/cookiecutter-data-science/#contributing).
 
 ### Installing development requirements
 ------------
